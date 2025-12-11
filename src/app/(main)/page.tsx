@@ -1,6 +1,10 @@
+"use client";
+
 import Button from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const counts = [
     { label: "Total MCQ’s:", count: "100" },
     { label: "Total marks:", count: "100" },
@@ -55,6 +59,7 @@ export default function Home() {
         variant="primary"
         fullWidth
         className="max-w-[360px] mt-10 mx-auto"
+        onClick={() => router.push("/mcq")}
       >
         Start Test
       </Button>
