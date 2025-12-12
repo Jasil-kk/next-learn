@@ -1,35 +1,42 @@
 "use client";
 
 import Button from "@/components/ui/Button";
+import { useMcq } from "@/hooks/useMcq";
 import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const { instruction, questions_count, total_marks, total_time } = useMcq();
+
   const counts = [
-    { label: "Total MCQ’s:", count: "100" },
-    { label: "Total marks:", count: "100" },
-    { label: "Total time:", count: "90:00" },
+    { label: "Total MCQ’s:", count: questions_count },
+    { label: "Total marks:", count: total_marks },
+    { label: "Total time:", count: `${total_time}:00` },
   ];
 
-  const instructions = [
-    "You have 100 minutes to complete the test.",
-    "Test consists of 100 multiple-choice q’s.",
-    "You are allowed 2 retest attempts if you do not pass on the first try.",
-    "Each incorrect answer will incur a negative mark of -1/4.",
-    "Ensure you are in a quiet environment and have a stable internet connection.",
-    "Keep an eye on the timer, and try to answer all questions within the given time.",
-    "Do not use any external resources such as dictionaries, websites, or assistance.",
-    "Complete the test honestly to accurately assess your proficiency level.",
-    "Check answers before submitting.",
-    "Your test results will be displayed immediately after submission, indicating whether you have passed or need to retake the test.",
-  ];
+  const instructionsList = useMemo(() => {
+    if (!instruction) return [];
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(instruction, "text/html");
+      return Array.from(doc.querySelectorAll("li")).map(
+        (li) => li.textContent || ""
+      );
+    } catch (err) {
+      console.error("Failed to parse instructions:", err);
+      return [];
+    }
+  }, [instruction]);
+
   return (
     <div className="w-full max-w-[700px] p-5 pb-20 mx-auto">
       <h3 className="font-medium text-xl sm:text-2xl text-center">
         Ancient Indian History MCQ
       </h3>
+
       <div className="mt-5 w-full bg-[#1C3141] text-white grid grid-cols-1 sm:grid-cols-3 p-5 rounded-lg">
-        {counts?.map((item, index) => (
+        {counts.map((item, index) => (
           <div
             key={index}
             className={`flex flex-col items-center justify-center py-2.5 sm:py-0 ${
@@ -50,7 +57,7 @@ export default function Home() {
         Instructions:
       </h5>
       <ul className="mt-3 text-[#5C5C5C] font-normal text-sm sm:text-base list-decimal pl-5 space-y-2">
-        {instructions?.map((item, index) => (
+        {instructionsList.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
       </ul>

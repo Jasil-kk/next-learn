@@ -7,33 +7,46 @@ import Image from "next/image";
 interface ModalProps {
   open: boolean;
   onClose: () => void;
+  totalQuestions: number;
+  questionsAnswered: number;
+  markedForReview: number;
+  remainingTime: string;
+  onSubmit: () => void;
 }
 
-export default function SubmitModal({ open, onClose }: ModalProps) {
+export default function SubmitModal({
+  open,
+  onClose,
+  totalQuestions,
+  questionsAnswered,
+  markedForReview,
+  remainingTime,
+  onSubmit,
+}: ModalProps) {
   const results = [
     {
       icon: "/images/svg/timer.svg",
       iconBoxClassName: "bg-[#1C3141]",
       label: "Remaining Time:",
-      value: "87:13",
+      value: remainingTime,
     },
     {
       icon: "/images/svg/box-question.svg",
       iconBoxClassName: "bg-[#DDA428]",
       label: "Total Questions:",
-      value: "100",
+      value: totalQuestions ?? 0,
     },
     {
       icon: "/images/svg/box-question.svg",
       iconBoxClassName: "bg-[#4CAF50]",
       label: "Questions Answered:",
-      value: "003",
+      value: questionsAnswered ?? 0,
     },
     {
       icon: "/images/svg/box-question.svg",
       iconBoxClassName: "bg-[#800080]",
       label: "Marked for review:",
-      value: "001",
+      value: markedForReview ?? 0,
     },
   ];
   return (
@@ -52,7 +65,7 @@ export default function SubmitModal({ open, onClose }: ModalProps) {
               alt="Cross"
               width={10}
               height={10}
-className="min-w-2.5"
+              className="min-w-2.5"
             />
           </button>
         </div>
@@ -70,7 +83,7 @@ className="min-w-2.5"
             </p>
           </div>
         ))}
-        <Button onClick={onClose} fullWidth className="mt-5">
+        <Button onClick={onSubmit} fullWidth className="mt-5">
           Submit Test
         </Button>
       </div>
