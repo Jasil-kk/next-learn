@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MCQ Test Application
 
-## Getting Started
+This is a **Next.js** based MCQ (Multiple Choice Question) Test application with authentication, instructions, quiz, and result pages. The project is built with **TypeScript**, **Tailwind CSS**, and **Redux Toolkit** for state management. It includes form validation using **Formik + Yup**, API integration with **Axios**, and toast notifications using **Sonner**.
 
-First, run the development server:
+---
 
-```bash
+## Features
+
+1. **Authentication**
+   - Users log in using their **mobile number**.
+   - OTP verification is required.
+   - If the user is not registered, they must fill in their **personal details** (name, email, qualification, profile image).
+
+2. **Instructions Page**
+   - After logging in, users are redirected to the **Instructions Page**.
+   - Shows the total number of questions, total marks, and total time for the test.
+   - Displays instructions for the test.
+   - Clicking **Start Test** navigates to the MCQ page.
+
+3. **MCQ Page**
+   - Displays questions with multiple choice options.
+   - Users can **select answers**, navigate between questions, or mark questions for review.
+   - Countdown timer based on the total test time.
+   - Auto-submit functionality when time expires.
+   - **Comprehensive paragraphs** can be viewed in a modal if provided.
+
+4. **Result Page**
+   - After submitting the answers, users are redirected to the **Result Page**.
+   - Shows total questions, correct answers, incorrect answers, and unanswered questions.
+   - Displays the user's score.
+
+---
+
+## Technologies Used
+
+- **Next.js** (React Framework)
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Redux Toolkit** for state management
+- **Formik + Yup** for form handling and validation
+- **Axios** for API calls
+- **Sonner** for toast notifications
+- **React Hooks** for custom logic
+- **Next.js App Router** (`use client` for client components)
+
+---
+
+## Installation
+
+1. Clone the repository:
+
+git clone <https://github.com/Jasil-kk/next-learn.git>
+cd <next-learn>
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The app will be available at http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Enter your mobile number and verify OTP.
+2. Fill in personal details if not already registered.
+3. Read instructions on the Instructions Page.
+4. Start the test and answer questions in the MCQ page.
+5. Submit the test or wait for auto-submit when the timer ends.
+6. View your results on the Result Page.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Notes
 
-## Learn More
+- Forms are validated using Formik + Yup.
+- State is managed using Redux Toolkit.
+- Toast notifications are handled by Sonner.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
