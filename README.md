@@ -50,9 +50,13 @@ This is a **Next.js** based MCQ (Multiple Choice Question) Test application with
 1. Clone the repository:
 
 git clone <https://github.com/Jasil-kk/next-learn.git>
-cd <next-learn>
+
+cd next-learn
+
 npm install
+
 npm run dev
+
 The app will be available at http://localhost:3000
 
 ## Usage
