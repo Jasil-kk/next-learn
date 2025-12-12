@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "sonner";
+import Head from "next/head";
 
 export default function LoginPage() {
   const { handleSendOtp, loading } = useAuth();
@@ -46,46 +47,56 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full h-full text-[#1C3141] p-5 sm:p-6 flex flex-col">
-      <h1 className="font-semibold text-xl sm:text-2xl">
-        Enter your phone number
-      </h1>
-
-      <p className="mt-3 text-sm sm:text-base font-normal">
-        We use your mobile number to identify your account
-      </p>
-
-      <form onSubmit={formik.handleSubmit} className="w-full mt-5">
-        <FloatingInput
-          label="Phone number"
-          type="text"
-          value={formik.values.phone}
-          onChange={handlePhoneChange}
-          error={
-            formik.touched.phone && formik.errors.phone
-              ? formik.errors.phone
-              : ""
-          }
-          disabled={loading}
+    <>
+      <Head>
+        <title>Login – MyApp</title>
+        <meta
+          name="description"
+          content="Login to your account using your mobile number to access MCQ tests and more."
         />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
+      <div className="w-full h-full text-[#1C3141] p-5 sm:p-6 flex flex-col">
+        <h1 className="font-semibold text-xl sm:text-2xl">
+          Enter your phone number
+        </h1>
 
-        <p className="mt-3 mb-12 text-[#5C5C5C] text-xs font-normal">
-          By tapping Get started, you agree to the{" "}
-          <span className="text-[#1C3141] cursor-pointer select-none">
-            Terms & Conditions
-          </span>
+        <p className="mt-3 text-sm sm:text-base font-normal">
+          We use your mobile number to identify your account
         </p>
 
-        <Button
-          variant="primary"
-          fullWidth
-          className="mt-auto"
-          disabled={loading}
-          type="submit"
-        >
-          {loading ? "Sending..." : "Get Started"}
-        </Button>
-      </form>
-    </div>
+        <form onSubmit={formik.handleSubmit} className="w-full mt-5">
+          <FloatingInput
+            label="Phone number"
+            type="text"
+            value={formik.values.phone}
+            onChange={handlePhoneChange}
+            error={
+              formik.touched.phone && formik.errors.phone
+                ? formik.errors.phone
+                : ""
+            }
+            disabled={loading}
+          />
+
+          <p className="mt-3 mb-12 text-[#5C5C5C] text-xs font-normal">
+            By tapping Get started, you agree to the{" "}
+            <span className="text-[#1C3141] cursor-pointer select-none">
+              Terms & Conditions
+            </span>
+          </p>
+
+          <Button
+            variant="primary"
+            fullWidth
+            className="mt-auto"
+            disabled={loading}
+            type="submit"
+          >
+            {loading ? "Sending..." : "Get Started"}
+          </Button>
+        </form>
+      </div>
+    </>
   );
 }
